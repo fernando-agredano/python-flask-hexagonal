@@ -352,6 +352,30 @@ Guarda como `p2-notifications.postman_collection.json` e impórtalo en Postman:
 
 ---
 
+## Despliegue en Render
+
+Este proyecto está desplegado como un **Web Service** en [Render](https://render.com).
+
+### Pasos para desplegar
+
+1. En el dashboard de Render, crea un nuevo **Web Service** y conecta el repositorio.
+
+2. Configura el servicio:
+
+   | Campo | Valor |
+   |-------|-------|
+   | **Environment** | `Python 3` |
+   | **Build Command** | `pip install -r requirements.txt` |
+   | **Start Command** | `gunicorn main:app --bind 0.0.0.0:$PORT` |
+
+   > Si no tienes `gunicorn` en `requirements.txt`, también puedes usar: `flask --app main run --host 0.0.0.0 --port $PORT` (solo para desarrollo/demo).
+
+3. No se requieren variables de entorno. La base de datos `notifications.db` se crea automáticamente al arrancar.
+
+4. Una vez desplegado, copia la URL pública (ej. `https://python-flask-hexagonal.onrender.com`) y pégala en el panel de ajustes de **API Explorer** para apuntar al entorno de producción.
+
+---
+
 ## Diferencia clave vs python-fastapi-tasks (Layered)
 
 |                            | python-fastapi-tasks     | python-flask-hexagonal    |
